@@ -1,0 +1,17 @@
+@if (flagLoadingData && !errorLoadingData) {
+<app-loader></app-loader>
+} @else if(!flagLoadingData && errorLoadingData) {
+<div>Error loading Data. Please try again Later</div>
+} @else { @for (job of jobDataList; track job.id) {
+<div class="posting" [id]="job.id">
+  <div class="title">{{ job.title }}</div>
+  <div class="subContent">
+    By {{ job.by }}
+    <span style="margin-left: 16px">{{ job.time | date : "medium" }}</span>
+  </div>
+</div>
+} @empty {
+<div>No job openings currently. Please check sometime later</div>
+} @if(jobDataList.length){
+<div class="btn" (click)="loadMoreJobs()">Load more Jobs</div>
+} }
